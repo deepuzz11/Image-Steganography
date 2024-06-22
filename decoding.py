@@ -1,29 +1,31 @@
 from PIL import Image
 
-def decode_image(encoded_image_path, original_image_path):
-    original_image = Image.open(original_image_path)
-    width, height = original_image.size
+def decode_image(encoded_image_path):
+    # Open the image
     encoded_image = Image.open(encoded_image_path)
-    decoded_message = ''
+    # Ensure the image is in RGB mode
+    encoded_image = encoded_image.convert("RGB")
 
-    pixel_data = encoded_image.load()
+    binary_message = ""
+    for y in range(encoded_image.height):
+        for x in range(encoded_image.width):
+            r, g, b = encoded_image.getpixel((x, y))
+            binary_message += f'{r & 1}{g & 1}{b & 1}'
 
-    for y in range(height):
-        for x in range(width):
-            r, g, b = pixel_data[x, y]
-            decoded_char = chr(r & 1 | (g & 1) << 1 | (b & 1) << 2)
-            decoded_message += decoded_char
+    # Make sure we only take full bytes and avoid padding issues
+    if len(binary_message) % 8 != 0:
+        binary_message = binary_message[:-(len(binary_message) % 8)]
 
-    # Strip any trailing null characters from the decoded message
-    message = decoded_message.rstrip('\x00')
+    # Convert the binary message to a string
+    message = ""
+    for i in range(0, len(binary_message), 8):
+        byte = binary_message[i:i + 8]
+        if byte == "00000000":  # Stop at a null byte
+            break
+        char = chr(int(byte, 2))
+        if char.isprintable():  # Ensure only printable characters are included
+            message += char
+        else:
+            break
+
     return message
-
-# def main():
-#     encoded_image_path = 'static/images/Encoded_Image.png'
-#     original_image_path = 'Original_Image.jpg'
-
-#     decoded_message = decode_image(encoded_image_path, original_image_path)
-#     print("Decoded message:", decoded_message)
-
-# if __name__ == '__main__':
-#     main()

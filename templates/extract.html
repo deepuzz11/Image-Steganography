@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steganography Web App - Extracted Text</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Extracted Text from Image</h1>
+        
+        <!-- Display Filename and Extracted Text -->
+        <div>
+            <h2>Filename: {{ filename }}</h2>
+            <p>Extracted Text:</p>
+            <pre>{{ extracted_text }}</pre>
+        </div>
+
+        <!-- Return to Home Link -->
+        <p><a href="/">Return to Home</a></p>
+    </div>
+</body>
+</html>

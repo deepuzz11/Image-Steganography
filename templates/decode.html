@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steganography Web App - Decode Image</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Steganography Web App - Decode Image</h1>
+        
+        <div id="decoded-message">
+            <h2>Decoded Message</h2>
+            <p id="decoded-text">{{ decoded_message }}</p>
+        </div>
+        
+        <p><a href="{{ url_for('index') }}">Return to Home</a></p>
+    </div>
+</body>
+</html>

@@ -10,6 +10,11 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB limit for uploaded files
+
+# Ensure the upload folder exists
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -32,7 +37,8 @@ def upload_file():
         
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(file_path)
             return redirect(url_for('upload_image', filename=filename))
     
     return render_template('upload.html')
@@ -47,27 +53,29 @@ def encode(filename):
         message = request.form['message']
         image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         encode_message(image_path, message)
-        return redirect(url_for('index'))
+        return redirect(url_for('upload_image', filename=filename))
     
-    return render_template('encode.html')
+    return render_template('encode.html', filename=filename)
 
 @app.route('/decode/<filename>')
-def decode(filename):
+def decode_route(filename):
     image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    encoded_image_path = 'static/images/Encoded_Image.png'
-    decoded_message = decode_image(encoded_image_path, image_path)
-    return decoded_message
+    
+    if not os.path.exists(image_path):
+        return "File not found. Please upload an image first."
+    
+    decoded_message = decode_image(image_path)
+    return render_template('decode.html', filename=filename, decoded_message=decoded_message)
 
 @app.route('/extract/<filename>')
-def extract(filename):
+def extract_route(filename):
     image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    
+    if not os.path.exists(image_path):
+        return "File not found. Please upload an image first."
+    
     extracted_text = extract_text_from_image(image_path)
-    return extracted_text
-
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'],
-                               filename)
+    return render_template('extract.html', filename=filename, extracted_text=extracted_text)
 
 if __name__ == '__main__':
     app.run(debug=True)

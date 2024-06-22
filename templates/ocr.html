@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steganography Web App - Extract Text</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Steganography Web App - Extract Text</h1>
+        
+        <!-- Form to Trigger Text Extraction -->
+        <form action="{{ url_for('extract_route', filename=filename) }}" method="get">
+            <button type="submit">Extract Text</button>
+        </form>
+
+        <!-- Display Extracted Text -->
+        <div id="extracted-text">
+            <h2>Extracted Text</h2>
+            <p>{{ extracted_text }}</p>
+        </div>
+        
+        <!-- Return to Home Link -->
+        <p><a href="/">Return to Home</a></p>
+    </div>
+</body>
+</html>

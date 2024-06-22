@@ -10,7 +10,19 @@
     <div class="container">
         <h1>Steganography Web App - Upload Status</h1>
         
+        {% if filename %}
         <p>Uploaded image: <strong>{{ filename }}</strong></p>
+        <p><a href="/encode/{{ filename }}">Encode Image</a></p>
+        <p><a href="/decode/{{ filename }}">Decode Image</a></p>
+        <p><a href="/extract/{{ filename }}">Extract Text</a></p>
+        {% else %}
+        <p>No image uploaded. Please upload an image.</p>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" id="file" accept=".png, .jpg, .jpeg" required>
+            <button type="submit">Upload Image</button>
+        </form>
+        {% endif %}
+        
         <p><a href="/">Return to Home</a></p>
     </div>
 </body>

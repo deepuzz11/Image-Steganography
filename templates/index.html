@@ -4,43 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Steganography Web App</title>
+    <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='favicon.jpg') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <div class="container">
         <h1>Steganography Web App</h1>
         
+        <!-- Form to Upload Image -->
         <form action="/upload" method="post" enctype="multipart/form-data">
             <input type="file" name="file" id="file" accept=".png, .jpg, .jpeg" required>
             <button type="submit">Upload Image</button>
         </form>
-
-        <div id="operations">
-            <h2>Choose an Operation:</h2>
-            <a href="#" onclick="showEncodeForm()">Encode with Message</a>
-            <a href="#" onclick="decode()">Decode Image</a>
-            <a href="#" onclick="extract()">Extract Text</a>
-        </div>
-
-        <div id="encode-form" style="display: none;">
-            <form action="/encode/{{ filename }}" method="post">
-                <label for="message">Message to Encode:</label>
-                <input type="text" id="message" name="message" required>
-                <button type="submit">Encode</button>
-            </form>
-        </div>
-
-        <div id="decoded-message">
-            <h2>Decoded Message</h2>
-            <p id="decoded-text"></p>
-        </div>
-        
-        <div id="extracted-text">
-            <h2>Extracted Text</h2>
-            <p id="extracted-text"></p>
-        </div>
     </div>
     
+    <!-- JavaScript for Dynamic UI -->
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 </html>

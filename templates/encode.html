@@ -9,12 +9,15 @@
 <body>
     <div class="container">
         <h1>Steganography Web App - Encode Message</h1>
-        <form action="/encode/{{ filename }}" method="post">
+        
+        <!-- Form to submit encoding request -->
+        <form action="{{ url_for('encode', filename=filename) }}" method="post">
             <label for="message">Message to Encode:</label>
             <input type="text" id="message" name="message" required>
             <button type="submit">Encode</button>
         </form>
 
+        <!-- Return to home link -->
         <p><a href="/">Return to Home</a></p>
     </div>
 </body>
