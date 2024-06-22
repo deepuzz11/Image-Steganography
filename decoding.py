@@ -18,9 +18,8 @@ def decode_image(encoded_image_path, original_image_path):
     message = decoded_message.rstrip('\x00')
     return message
 
-# # Example usage
 # def main():
-#     encoded_image_path = 'encoded_image.png'
+#     encoded_image_path = 'static/images/Encoded_Image.png'
 #     original_image_path = 'Original_Image.jpg'
 
 #     decoded_message = decode_image(encoded_image_path, original_image_path)

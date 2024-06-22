@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steganography Web App - Encode Message</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Steganography Web App - Encode Message</h1>
+        <form action="/encode/{{ filename }}" method="post">
+            <label for="message">Message to Encode:</label>
+            <input type="text" id="message" name="message" required>
+            <button type="submit">Encode</button>
+        </form>
+
+        <p><a href="/">Return to Home</a></p>
+    </div>
+</body>
+</html>
