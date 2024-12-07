@@ -23,7 +23,23 @@ By embedding messages in digital images using steganography, we can create a mor
 
 ## File Structure
 ```
-Image-Steganography/ │ ├── static/ # Static assets (CSS, JavaScript, images) ├── templates/ # HTML templates for the web application ├── uploads/ # Directory for storing uploaded and processed images │ ├── app.py # Main Flask application ├── encoding.py # Script for encoding messages into images ├── decoding.py # Script for decoding messages from images ├── OCR.py # Script for extracting text from images using Tesseract ├── README.md # Project documentation ├── LICENSE # License file │ ├── Encoded_Image.png # Example of an encoded image ├── Original_Image.jpg # Example of an original image ├── Original_Image_2.jpg # Another original image example └── Blue Modern Pitch Deck Presentation.pptx # Project presentation
+Image-Steganography/
+│
+├── static/ # Static assets (CSS, JavaScript, images)
+├── templates/ # HTML templates for the web application
+├── uploads/ # Directory for storing uploaded and processed images
+│
+├── app.py # Main Flask application
+├── encoding.py # Script for encoding messages into images
+├── decoding.py # Script for decoding messages from images
+├── OCR.py # Script for extracting text from images using Tesseract
+├── README.md # Project documentation
+├── LICENSE # License file
+│
+├── Encoded_Image.png # Example of an encoded image
+├── Original_Image.jpg # Example of an original image
+├── Original_Image_2.jpg # Another original image example
+└── Blue Modern Pitch Deck Presentation.pptx # Project presentation
 ```
 ## Installation
 
@@ -69,4 +85,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - Python PIL Library
 - Tesseract OCR
 - Flask Framework
-```
